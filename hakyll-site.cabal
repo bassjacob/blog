@@ -1,0 +1,20 @@
+name:                hakyll-site
+version:             0.1.0.0
+synopsis:            Hakyll project template from stack
+description:         Please see README.md
+homepage:            https://github.com/subshad/hakyll-site#readme
+license:             BSD3
+license-file:        LICENSE
+author:              Jacob Bass
+maintainer:          jacob@jacobbass.net
+copyright:           MIT
+category:            Web
+build-type:          Simple
+cabal-version:       >=1.10
+
+executable hakyll-site
+  main-is:             site.hs
+  default-language:    Haskell2010
+  ghc-options:         -threaded
+  build-depends:       base == 4.*,
+                       hakyll == 4.7.*
