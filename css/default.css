@@ -20,7 +20,7 @@ div#header #navigation a {
   text-decoration: none;
   text-transform: uppercase;
   margin-bottom: 0;
-  padding: 1vw;
+  padding: 5px;
 }
 
 @media (max-width: 450px) {
