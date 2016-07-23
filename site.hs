@@ -20,8 +20,9 @@ main = hakyll $ do
     compile compressCssCompiler
 
   match "pages/*" $ do
-    route   $ cleanRoute
+    route   $ cleanRouteWithoutDir
     compile $ pandocCompiler
+      >>= loadAndApplyTemplate "templates/page.html"    defaultContext
       >>= loadAndApplyTemplate "templates/default.html" defaultContext
       >>= relativizeUrls
       >>= cleanIndexUrls
@@ -73,14 +74,26 @@ cleanRoute = customRoute createIndexRoute
     createIndexRoute ident = takeDirectory p </> takeBaseName p </> "index.html"
                             where p = toFilePath ident
 
+cleanRouteWithoutDir :: Routes
+cleanRouteWithoutDir = customRoute createIndexRoute
+  where
+    createIndexRoute ident = takeBaseName p </> "index.html"
+                            where p = toFilePath ident
+
 cleanIndexUrls :: Item String -> Compiler (Item String)
 cleanIndexUrls = return . fmap (withUrls cleanIndex)
 
+removePages :: Item String -> Compiler (Item String)
+removePages = return . fmap (replaceAll pattern replacement)
+  where
+    pattern = "/pages/"
+    replacement = const "/"
+
 cleanIndexHtmls :: Item String -> Compiler (Item String)
 cleanIndexHtmls = return . fmap (replaceAll pattern replacement)
-    where
-      pattern = "/index.html"
-      replacement = const "/"
+  where
+    pattern = "/index.html"
+    replacement = const "/"
 
 cleanIndex :: String -> String
 cleanIndex url

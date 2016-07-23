@@ -1,5 +1,5 @@
 ---
-title: About
+title: About Me
 ---
 I'm a software engineer in Sydney Australia with a passion for delivering great experiences for developers and end users.
 

@@ -3,56 +3,26 @@
 body {
   color: black;
   margin: 0 auto;
-  width: 100%;
+  width: 98%;
   background: #dfdfdf;
+  max-width: 700px;
+  font-size: 1.5em;
 }
 
 div#header {
   border-bottom: 2px solid black;
-  margin-bottom: 30px;
-  padding: 12px 0px 12px 0px;
   text-align: center;
+  margin-bottom: 5vh;
 }
 
 div#header #navigation a {
   color: black;
-  font-size: 3vh;
-  font-weight: bold;
   text-decoration: none;
   text-transform: uppercase;
-}
-
-h1 {
-  font-size: 24px;
-}
-
-h2 {
-  font-size: 20px;
-}
-
-div.info {
-  color: #555;
-  font-size: 14px;
-  font-style: italic;
-}
-
-.title-card {
-  width: 100%;
-  text-align: center;
-}
-
-.title-card__title {
-  margin: 30vh auto 0px auto;
-  padding-bottom: 15vh;
-  text-transform: uppercase;
-  font-size: 8vw;
-  line-height: 5vw;
-}
-
-.title-card__subtitle {
-  text-transform: lowercase;
-  font-size: 3vw;
-  line-height: 1.5vw;
+  padding: 1vw;
+  display: inline-block;
+  margin-bottom: 0;
+  font-size: 1.1rem;
 }
 
 .contact-icons {
@@ -63,8 +33,7 @@ div.info {
 
 .contact-icon {
   display: inline-block;
-  padding: 0.5em;
-  font-size: 5vw;
+  padding: 0.25em;
 }
 
 a {
