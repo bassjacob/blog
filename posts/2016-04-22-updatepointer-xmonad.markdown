@@ -1,5 +1,5 @@
 ---
-title: Changes to UpdatePointer in XMonad Contrib v0.12
+title: UpdatePointer in XMonad Contrib v0.12
 summary: How to fix a `Not in scope data constructor 'Relative'` error in XMonad.Contrib.Actions.UpdatePointer v0.12
 ---
 
