@@ -3,16 +3,19 @@
 body {
   color: black;
   margin: 0 auto;
-  width: 95%;
   background: #dfdfdf;
   max-width: 700px;
   font-size: 1.5em;
 }
 
+.content {
+  width: 95%;
+}
+
 div#header {
   border-bottom: 2px solid black;
   text-align: center;
-  margin-bottom: 5vh;
+  margin-bottom: 2vh;
 }
 
 div#header #navigation a {
@@ -44,6 +47,11 @@ div#header #navigation a {
 .contact-icon {
   display: inline-block;
   padding: 0.25em;
+}
+
+.title-card {
+  text-align: center;
+  margin-top: 20vh;
 }
 
 a {
