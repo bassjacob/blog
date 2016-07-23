@@ -58,10 +58,6 @@ a {
  color: black;
 }
 
-.post-list__title {
-  font-weight: bold;
-}
-
-.post-list__summary {
-  padding-left: 50px;
+.post-list__list {
+  list-style-type: none;
 }
