@@ -15,7 +15,11 @@ main = hakyll $ do
     route   idRoute
     compile copyFileCompiler
 
-  match "css/*" $ do
+  match "css/*.hs" $ do
+    route   $ setExtension "css"
+    compile $ getResourceString >>= withItemBody (unixFilter "runghc" [])
+
+  match "css/*.css" $ do
     route   idRoute
     compile compressCssCompiler
 
@@ -84,15 +88,13 @@ cleanIndexUrls :: Item String -> Compiler (Item String)
 cleanIndexUrls = return . fmap (withUrls cleanIndex)
 
 removePages :: Item String -> Compiler (Item String)
-removePages = return . fmap (replaceAll pattern replacement)
+removePages = return . fmap (replaceAll "/pages/" replacement)
   where
-    pattern = "/pages/"
     replacement = const "/"
 
 cleanIndexHtmls :: Item String -> Compiler (Item String)
-cleanIndexHtmls = return . fmap (replaceAll pattern replacement)
+cleanIndexHtmls = return . fmap (replaceAll "/index.html" replacement)
   where
-    pattern = "/index.html"
     replacement = const "/"
 
 cleanIndex :: String -> String

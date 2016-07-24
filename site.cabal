@@ -19,4 +19,5 @@ executable site
   build-depends:       base == 4.*,
                        hakyll == 4.7.*,
                        filepath,
-                       old-locale
+                       old-locale,
+                       clay >= 0.11
