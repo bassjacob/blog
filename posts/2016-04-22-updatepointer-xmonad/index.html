@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width">
+
+    <title>Jacob Bass - UpdatePointer in XMonad Contrib v0.12</title>
+
+    <link rel="stylesheet" type="text/css" href="../../css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/skeleton.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/code.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/default.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" />
+  </head>
+  <body>
+    <div id="header">
+      <nav id="navigation">
+        <a href="../../">Home</a>
+        <a href="../../about/">About</a>
+        <a href="../../archive/">Archive</a>
+        <a href="../../talks/">Talks</a>
+        <a href="../../projects/">Projects</a>
+      </div>
+    </div>
+    <div class="content u-center-block">
+      <h5>UpdatePointer in XMonad Contrib v0.12</h5>
+
+<div>
+  Posted on April 22, 2016
+</div>
+
+<p>The time came to replace an ailing macbook air with a new machine, and I’ve chosen a Lenovo. Now that I have something that uses an Intel WiFi chip, I’m much happier to take a shot at running Arch Linux, and I thought while I was undergoing this change I would switch from i3wm to xmonad.</p>
+<p>However, as part of the setup I wanted the mouse to follow the window focus, which is provided by the <a href="http://xmonad.org/xmonad-docs/xmonad-contrib/">XMonad-Contrib</a>. At the time of writing, the version in the ArchLinux repository is 0.12, but the documentation is for the 0.11 release. This means that the advice on the <a href="http://xmonad.org/xmonad-docs/xmonad-contrib/XMonad-Actions-UpdatePointer.html">XMonad.Actions.UpdatePointer</a> page is invalid, since there was a breaking change to the API the PointerPosition data constructor uses to position the cursor.</p>
+<p>This lead to me getting a very confusing error: Not in scope: data constructor ‘Relative’, the fix for which is outlined in the <a href="https://github.com/xmonad/xmonad-contrib/blob/master/XMonad/Actions/UpdatePointer.hs#L40">source code</a>, and reproduced below for convenience.</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"> <span class="co">-- nearest point of window</span>
+logHook <span class="fu">=</span> updatePointer (<span class="fl">0.5</span>, <span class="fl">0.5</span>) (<span class="dv">1</span>, <span class="dv">1</span>)
+<span class="co">-- exact centre of window</span>
+logHook <span class="fu">=</span> updatePointer (<span class="fl">0.5</span>, <span class="fl">0.5</span>) (<span class="dv">0</span>, <span class="dv">0</span>)
+<span class="co">-- near the top-left</span>
+logHook <span class="fu">=</span> updatePointer (<span class="fl">0.25</span>, <span class="fl">0.25</span>) (<span class="fl">0.25</span>, <span class="fl">0.25</span>)
+<span class="co">-- within 110% of the edge</span>
+logHook <span class="fu">=</span> updatePointer (<span class="fl">0.5</span>, <span class="fl">0.5</span>) (<span class="fl">1.1</span>, <span class="fl">1.1</span>)</code></pre></div>
+<p>This syntax replaces the previous use of the data constructors (Nearest, Relative and TowardsCentre);</p>
+
+    </div>
+  </body>
+</html>
