@@ -10,10 +10,29 @@ centerBlock = do
   display block
   sym2 margin (px 0) auto
 
+  -- margin 0 auto
+  -- margin l u r d
+  -- sym2 margin l u
+  -- sym4 margin l
+
 textColor = color black
+
+myHeader = do
+  ".header" ?
+    do borderBottom solid (px 2) black
+       marginBottom (vh 5)
+       textAlign center
+  ".header__navigation-link" ?
+    do textColor
+       textDecoration none
+       textTransform uppercase
+       marginBottom (px 0)
+       sym padding (px 5)
+
 
 styleSheet :: Css
 styleSheet = do
+  myHeader
   ".title-card" ?
     do textAlign center
        marginTop (vh 20)
@@ -26,16 +45,6 @@ styleSheet = do
   ".contact-icon" ?
     do display inlineBlock
        sym padding (em 0.25)
-  ".header" ?
-    do borderBottom solid (px 2) black
-       marginBottom (vh 5)
-       textAlign center
-  ".header__navigation-link" ?
-    do textColor
-       textDecoration none
-       textTransform uppercase
-       marginBottom (px 0)
-       sym padding (px 5)
   ".content" ?
     do centerBlock
        width (pct 95)
