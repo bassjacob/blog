@@ -7,6 +7,7 @@ import           Data.List              (sortBy,isInfixOf,isSuffixOf)
 import           Data.Ord               (comparing)
 import           System.Locale          (defaultTimeLocale)
 import           System.FilePath.Posix  (takeBaseName,takeDirectory,(</>),splitFileName)
+import           Text.Pandoc.Options
 
 --------------------------------------------------------------------------------
 main :: IO ()
@@ -15,9 +16,25 @@ main = hakyll $ do
     route   idRoute
     compile copyFileCompiler
 
+  match "images/**/*" $ do
+    route   idRoute
+    compile copyFileCompiler
+
   match "css/*" $ do
     route   idRoute
     compile compressCssCompiler
+
+  match "js/*" $ do
+    route   idRoute
+    compile copyFileCompiler
+
+  match "reveal.js/*" $ do
+    route idRoute
+    compile copyFileCompiler
+
+  match "reveal.js/**/*" $ do
+    route idRoute
+    compile copyFileCompiler
 
   match "pages/*" $ do
     route   $ cleanRouteWithoutDir
@@ -32,6 +49,13 @@ main = hakyll $ do
     compile $ pandocCompiler
       >>= loadAndApplyTemplate "templates/post.html"    postCtx
       >>= loadAndApplyTemplate "templates/default.html" postCtx
+      >>= relativizeUrls
+      >>= cleanIndexUrls
+
+  match "presentations/*" $ do
+    route $ cleanRoute
+    compile $ presentationCompiler
+      >>= loadAndApplyTemplate "templates/revealjs.html" defaultContext
       >>= relativizeUrls
       >>= cleanIndexUrls
 
@@ -83,20 +107,15 @@ cleanRouteWithoutDir = customRoute createIndexRoute
 cleanIndexUrls :: Item String -> Compiler (Item String)
 cleanIndexUrls = return . fmap (withUrls cleanIndex)
 
-removePages :: Item String -> Compiler (Item String)
-removePages = return . fmap (replaceAll pattern replacement)
-  where
-    pattern = "/pages/"
-    replacement = const "/"
-
-cleanIndexHtmls :: Item String -> Compiler (Item String)
-cleanIndexHtmls = return . fmap (replaceAll pattern replacement)
-  where
-    pattern = "/index.html"
-    replacement = const "/"
-
 cleanIndex :: String -> String
 cleanIndex url
     | idx `isSuffixOf` url = take (length url - length idx) url
     | otherwise            = url
   where idx = "index.html"
+
+presentationCompiler :: Compiler (Item String)
+presentationCompiler = pandocCompilerWith defaultHakyllReaderOptions writerOptions
+  where writerOptions = defaultHakyllWriterOptions { writerSlideVariant = RevealJsSlides
+                                                   , writerSlideLevel = Just 2
+                                                   , writerHtml5 = True
+                                                   }
