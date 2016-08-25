@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Jacob Bass">
+$if(keywords)$
+  <meta name="keywords" content="$for(keywords)$$keywords$$sep$, $endfor$">
+$endif$
+  <title>$title$</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="/reveal.js/css/reveal.css">
+  <style type="text/css">code{white-space: pre;}</style>
+$if(highlighting-css)$
+  <style type="text/css">
+$highlighting-css$
+  </style>
+$endif$
+$if(theme)$
+  <link rel="stylesheet" href="/reveal.js/css/theme/$theme$.css" id="theme">
+$else$
+  <link rel="stylesheet" href="/reveal.js/css/theme/black.css" id="theme">
+$endif$
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section>
+        <h1 class="title">$title$</h1>
+        <h2 class="subtitle">$subtitle$</h2>
+      </section>
+
+      $body$
+
+      <section class="center">
+        <h1>$${whoami:-Jacob Bass}</h1>
+
+        <p>web:  www.bassjacob.com</p>
+        <p>email: me@bassjacob.com</p>
+        <p>twitter: @bassjacob</p>
+        <p>github:   bassjacob</p>
+      </section>
+    </div>
+  </div>
+
+  <script src="/reveal.js/lib/js/head.min.js"></script>
+  <script src="/reveal.js/js/reveal.js"></script>
+
+  <script>
+      Reveal.initialize({
+        controls: true,
+        progress: false,
+        history: true,
+        center: true,
+        touch: true,
+        fragments: true,
+        transition: 'fade',
+        margin: 0,
+      });
+    </script>
+  </body>
+</html>
