@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Jacob Bass">
+
+  <title>100 components and counting</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../reveal.js/css/reveal.css">
+  <style type="text/css">code{white-space: pre;}</style>
+
+
+  <link rel="stylesheet" href="../../reveal.js/css/theme/solarized.css" id="theme">
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section>
+        <h1 class="title">100 components and counting</h1>
+        <h2 class="subtitle">lessons from a year of building interfaces in react</h2>
+      </section>
+
+      <section><section id="how-has-your-year-been" class="titleslide slide level1 center" data-background="#073642"><h1>how has your year been?</h1></section><section id="build-scripts" class="slide level2">
+<h1>build scripts</h1>
+<p style="font-size: 75px;">
+makefiles -&gt; grunt -&gt; gulp -&gt; npm scripts
+</p>
+</section><section id="bundlers" class="slide level2">
+<h1>bundlers</h1>
+<p style="font-size: 75px;">
+browserify -&gt; webpack -&gt; webpack 2.0
+</p>
+</section><section id="transpilers" class="slide level2">
+<h1>transpilers</h1>
+<p style="font-size: 75px;">
+6to5 -&gt; babel 5 -&gt; babel 6
+</p>
+</section><section id="there-have-been-lots-of-changes" class="slide level2 center">
+<h1>there have been lots of changes</h1>
+<p style="font-size: 75px;">
+the changes will continue until morale improves
+</p>
+</section></section>
+<section><section id="section" class="titleslide slide level1" data-background="http://static.bassjacob.com/presentations/100-components-and-counting/fixing.gif"><h1> </h1></section><section id="overhaul-a-companys-frontend" class="slide level2 center" data-background="#073642">
+<h1>overhaul a company’s frontend</h1>
+</section><section class="slide level2">
+
+<p><img src="http://static.bassjacob.com/presentations/100-components-and-counting/thinking1.png" width="55%" /></p>
+</section><section class="slide level2">
+
+<p><img src="http://static.bassjacob.com/presentations/100-components-and-counting/thinking2.png" width="55%" /></p>
+</section><section class="slide level2">
+
+<p><img src="http://static.bassjacob.com/presentations/100-components-and-counting/page-without.png" width="60%" /></p>
+</section><section class="slide level2">
+
+<p><img src="http://static.bassjacob.com/presentations/100-components-and-counting/page-with.png" width="60%" /></p>
+</section><section id="share-and-share-alike" class="slide level2">
+<h1>share and share alike</h1>
+<ul>
+<li><h3 id="header">header</h3></li>
+<li><h3 id="footer">footer</h3></li>
+<li><h3 id="hero">hero</h3></li>
+<li><h3 id="map">map</h3></li>
+</ul>
+</section></section>
+<section><section id="section-1" class="titleslide slide level1"><h1><img src="http://static.bassjacob.com/presentations/100-components-and-counting/rube.gif" /></h1></section><section id="favour-simple-interactions-over-complex-shared-state" class="slide level2 center" data-background="#073642">
+<h1>favour simple interactions over complex shared state</h1>
+</section><section id="reactjs-architecture-and-the-mttr" class="slide level2">
+<h1>reactjs architecture and the mTTR</h1>
+<p style="font-size: 75px;">
+[m]ean [t]ime [t]o [r]edux
+</p>
+</section><section id="flux-redux-mobx-rxjs" class="slide level2">
+<h1>flux, redux, mobx, rxjs</h1>
+<ul>
+<li class="fragment"><p style="font-size: 75px;">
+don’t use setState, use flux
+</p></li>
+<li class="fragment"><p style="font-size: 75px;">
+don’t use flux, use redux
+</p></li>
+<li class="fragment"><p style="font-size: 75px;">
+don’t use redux, use mobx
+</p></li>
+<li class="fragment"><p style="font-size: 75px;">
+don’t use mobx, use rxjs
+</p></li>
+</ul>
+</section><section id="presentational-components" class="slide level2">
+<h1>presentational components</h1>
+</section><section id="the-wait-of-the-web" class="slide level2">
+<h1>the wait of the web</h1>
+<p style="font-size: 75px;">
+it’s not a typo, it’s a pun
+</p>
+</section><section class="slide level2">
+
+<figure>
+<img src="http://static.bassjacob.com/presentations/100-components-and-counting/nojs.png" />
+</figure>
+</section><section class="slide level2">
+
+<figure>
+<img src="http://static.bassjacob.com/presentations/100-components-and-counting/nojs2.png" />
+</figure>
+</section></section>
+<section><section id="section-2" class="titleslide slide level1" data-background="http://static.bassjacob.com/presentations/100-components-and-counting/overhaul.gif"><h1> </h1></section><section id="everything-is-a-module.-everything-is-a-repo" class="slide level2 center" data-background="#073642">
+<h1>everything is a module. everything is a repo?</h1>
+</section><section id="mono-repo" class="slide level2">
+<h1>Mono Repo</h1>
+<figure>
+<img src="http://static.bassjacob.com/presentations/100-components-and-counting/cfuipackages.png" />
+</figure>
+</section><section id="mono-repo-1" class="slide level2">
+<h1>Mono Repo</h1>
+<ul>
+<li><h2 id="shared-behaviour">shared behaviour</h2></li>
+<li><h2 id="tightly-coupled-dependencies">tightly coupled dependencies</h2></li>
+<li><h2 id="system-complexity-historical-simplicity">system complexity &gt; historical simplicity</h2></li>
+</ul>
+</section><section id="many-repo" class="slide level2">
+<h1>Many Repo</h1>
+<figure>
+<img src="http://static.bassjacob.com/presentations/100-components-and-counting/githubsearch.png" />
+</figure>
+</section><section id="many-repo-1" class="slide level2">
+<h1>Many Repo</h1>
+<ul>
+<li><h2 id="separate-concerns">separate concerns</h2></li>
+<li><h2 id="unintrusive-updates">unintrusive updates</h2></li>
+<li><h2 id="you-dont-employ-the-creators-of-lerna.js">you don’t employ the creators of lerna.js</h2></li>
+</ul>
+</section><section id="either-way-many-modules" class="slide level2">
+<h1>either way many modules</h1>
+</section><section id="can-create-update-and-ship-individual-components" class="slide level2">
+<h1>can create, update and ship individual components</h1>
+<h3 id="your-teams-can-interop-without-treading-on-each-others-toes">your teams can interop without treading on each others toes</h3>
+</section></section>
+<section><section id="section-3" class="titleslide slide level1" data-background="http://static.bassjacob.com/presentations/100-components-and-counting/bobthebuilder.jpg"><h1> </h1></section><section id="design-your-build-system" class="slide level2 center" data-background="#073642">
+<h1>design your build system</h1>
+<h2>
+be like bob
+</h2>
+</section><section id="make-it-easy-to-do-it-right" class="slide level2">
+<h1>make it easy to do it right</h1>
+<figure>
+<img src="http://static.bassjacob.com/presentations/100-components-and-counting/boilerplate.png" />
+</figure>
+</section><section class="slide level2">
+
+<p><img src="http://static.bassjacob.com/presentations/100-components-and-counting/boilerplate-output.png" width="50%" /></p>
+</section><section class="slide level2">
+
+<p><img src="http://static.bassjacob.com/presentations/100-components-and-counting/component1.png" width="80%" /></p>
+</section><section class="slide level2">
+
+<p><img src="http://static.bassjacob.com/presentations/100-components-and-counting/component2.png" width="100%" /></p>
+</section><section id="easy-to-enforce-with-a-build-system" class="slide level2">
+<h1>easy to enforce with a build system</h1>
+</section><section class="slide level2">
+
+<figure>
+<img src="http://static.bassjacob.com/presentations/100-components-and-counting/fe-build-output.png" />
+</figure>
+</section><section id="use-community-tools" class="slide level2">
+<h1>use community tools</h1>
+<ul>
+<li><h2 id="browserifywebpack">browserify/webpack</h2></li>
+<li><h2 id="babel">babel</h2></li>
+<li><h2 id="express">express</h2></li>
+</ul>
+</section><section id="create-react-app" class="slide level2">
+<h1>create-react-app</h1>
+<figure>
+<img src="http://static.bassjacob.com/presentations/100-components-and-counting/create-react-app.png" />
+</figure>
+</section></section>
+<section><section id="create-a-rendering-framework" class="titleslide slide level1 center" data-background="#073642"><h1>create a rendering framework</h1></section><section id="make-it-easy-to-use" class="slide level2">
+<h1>make it easy to use</h1>
+</section><section id="make-it-simple-to-extend" class="slide level2">
+<h1>make it simple to extend</h1>
+</section><section id="tailor-it-to-your-needs" class="slide level2">
+<h1>tailor it to your needs</h1>
+</section><section id="be-ready-to-throw-it-all-away" class="slide level2">
+<h1>be ready to throw it all away</h1>
+</section></section>
+<section><section id="recap" class="titleslide slide level1 center" data-background="#073642"><h1>recap</h1></section><section id="react" class="slide level2">
+<h1>react</h1>
+<ul>
+<li><h4 id="replace-incrementally">[R]eplace incrementally</h4></li>
+<li><h4 id="experiment-analyse-and-dont-be-afraid-to-re-engineer">[E]xperiment, analyse and don’t be afraid to re-engineer</h4></li>
+<li><h4 id="assess-your-choices-dont-choose-tech-for-techs-sake">[A]ssess your choices, don’t choose tech for tech’s sake</h4></li>
+<li><h4 id="components-and-modular-architecture">[C]omponents and modular architecture</h4></li>
+<li><h4 id="tool-up">[T]ool-Up</h4></li>
+</ul>
+</section></section>
+
+      <section class="center">
+        <h1>${whoami:-Jacob Bass}</h1>
+
+        <p>web:  www.bassjacob.com</p>
+        <p>email: me@bassjacob.com</p>
+        <p>twitter: @bassjacob</p>
+        <p>github:   bassjacob</p>
+      </section>
+    </div>
+  </div>
+
+  <script src="../../reveal.js/lib/js/head.min.js"></script>
+  <script src="../../reveal.js/js/reveal.js"></script>
+
+  <script>
+      Reveal.initialize({
+        controls: true,
+        progress: false,
+        history: true,
+        center: true,
+        touch: true,
+        fragments: true,
+        transition: 'fade',
+        margin: 0,
+      });
+    </script>
+  </body>
+</html>
