@@ -11,80 +11,83 @@ import           Text.Pandoc.Options
 
 --------------------------------------------------------------------------------
 main :: IO ()
-main = hakyll $ do
-  match "images/*" $ do
-    route   idRoute
-    compile copyFileCompiler
+main = do
+  revealTemplate <- readFile "templates/revealjs.html"
 
-  match "images/**/*" $ do
-    route   idRoute
-    compile copyFileCompiler
+  hakyll $ do
+    match "images/*" $ do
+      route   idRoute
+      compile copyFileCompiler
 
-  match "css/*" $ do
-    route   idRoute
-    compile compressCssCompiler
+    match "images/**/*" $ do
+      route   idRoute
+      compile copyFileCompiler
 
-  match "js/*" $ do
-    route   idRoute
-    compile copyFileCompiler
+    match "css/*" $ do
+      route   idRoute
+      compile compressCssCompiler
 
-  match "reveal.js/*" $ do
-    route idRoute
-    compile copyFileCompiler
+    match "js/*" $ do
+      route   idRoute
+      compile copyFileCompiler
 
-  match "reveal.js/**/*" $ do
-    route idRoute
-    compile copyFileCompiler
+    match "reveal.js/*" $ do
+      route idRoute
+      compile copyFileCompiler
 
-  match "pages/*" $ do
-    route   $ cleanRouteWithoutDir
-    compile $ pandocCompiler
-      >>= loadAndApplyTemplate "templates/page.html"    defaultContext
-      >>= loadAndApplyTemplate "templates/default.html" defaultContext
-      >>= relativizeUrls
-      >>= cleanIndexUrls
+    match "reveal.js/**/*" $ do
+      route idRoute
+      compile copyFileCompiler
 
-  match "posts/*" $ do
-    route $ cleanRoute
-    compile $ pandocCompiler
-      >>= loadAndApplyTemplate "templates/post.html"    postCtx
-      >>= loadAndApplyTemplate "templates/default.html" postCtx
-      >>= relativizeUrls
-      >>= cleanIndexUrls
-
-  match "presentations/*" $ do
-    route $ cleanRoute
-    compile $ presentationCompiler
-      >>= loadAndApplyTemplate "templates/revealjs.html" defaultContext
-      >>= relativizeUrls
-      >>= cleanIndexUrls
-
-  create ["archive.html"] $ do
-    route $ cleanRoute
-    compile $ do
-      posts <- recentFirst =<< loadAll "posts/*"
-      let archiveCtx =
-              listField "posts" postCtx (return posts) `mappend`
-              constField "title" "Archives"            `mappend`
-              defaultContext
-
-      makeItem ""
-        >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
-        >>= loadAndApplyTemplate "templates/default.html" archiveCtx
-        >>= relativizeUrls
-        >>= cleanIndexUrls
-
-
-  match "index.html" $ do
-    route idRoute
-    compile $ do
-      getResourceBody
-        >>= applyAsTemplate defaultContext
+    match "pages/*" $ do
+      route   $ cleanRouteWithoutDir
+      compile $ pandocCompiler
+        >>= loadAndApplyTemplate "templates/page.html"    defaultContext
         >>= loadAndApplyTemplate "templates/default.html" defaultContext
         >>= relativizeUrls
         >>= cleanIndexUrls
 
-  match "templates/*" $ compile templateCompiler
+    match "posts/*" $ do
+      route $ cleanRoute
+      compile $ pandocCompiler
+        >>= loadAndApplyTemplate "templates/post.html"    postCtx
+        >>= loadAndApplyTemplate "templates/default.html" postCtx
+        >>= relativizeUrls
+        >>= cleanIndexUrls
+
+    match "presentations/*" $ do
+      route $ cleanRoute
+      compile $ presentationCompiler revealTemplate
+        >>= loadAndApplyTemplate "templates/revealjs.html" defaultContext
+        >>= relativizeUrls
+        >>= cleanIndexUrls
+
+    create ["archive.html"] $ do
+      route $ cleanRoute
+      compile $ do
+        posts <- recentFirst =<< loadAll "posts/*"
+        let archiveCtx =
+                listField "posts" postCtx (return posts) `mappend`
+                constField "title" "Archives"            `mappend`
+                defaultContext
+
+        makeItem ""
+          >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
+          >>= loadAndApplyTemplate "templates/default.html" archiveCtx
+          >>= relativizeUrls
+          >>= cleanIndexUrls
+
+
+    match "index.html" $ do
+      route idRoute
+      compile $ do
+        getResourceBody
+          >>= applyAsTemplate defaultContext
+          >>= loadAndApplyTemplate "templates/default.html" defaultContext
+          >>= relativizeUrls
+          >>= cleanIndexUrls
+
+    match "templates/*" $ compile templateCompiler
 
 --------------------------------------------------------------------------------
 postCtx :: Context String
@@ -113,9 +116,10 @@ cleanIndex url
     | otherwise            = url
   where idx = "index.html"
 
-presentationCompiler :: Compiler (Item String)
-presentationCompiler = pandocCompilerWith defaultHakyllReaderOptions writerOptions
+presentationCompiler :: String -> Compiler (Item String)
+presentationCompiler revealTemplate = pandocCompilerWith defaultHakyllReaderOptions writerOptions
   where writerOptions = defaultHakyllWriterOptions { writerSlideVariant = RevealJsSlides
                                                    , writerSlideLevel = Just 2
                                                    , writerHtml5 = True
+                                                   , writerTemplate = revealTemplate
                                                    }
