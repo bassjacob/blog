@@ -18,11 +18,15 @@ $if(highlighting-css)$
 $highlighting-css$
   </style>
 $endif$
+
 $if(theme)$
   <link rel="stylesheet" href="/reveal.js/css/theme/$theme$.css" id="theme">
 $else$
   <link rel="stylesheet" href="/reveal.js/css/theme/black.css" id="theme">
 $endif$
+
+<link rel="stylesheet" href="/css/reveal_overrides.css">
+
 </head>
 <body>
   <div class="reveal">
@@ -50,16 +54,79 @@ $endif$
   <script src="/reveal.js/js/reveal.js"></script>
 
   <script>
-      Reveal.initialize({
-        controls: true,
-        progress: false,
-        history: true,
-        center: true,
-        touch: true,
-        fragments: true,
-        transition: 'fade',
-        margin: 0,
-      });
-    </script>
+    function grow(e) {
+      var oldSize = 34;
+
+      if (e.style.fontSize !== "") {
+        oldSize = parseInt(e.style.fontSize.replace('px',''));
+      }
+
+      e.style.fontSize = oldSize + "px";
+      var oldWidth = e.scrollWidth;
+      var oldHeight = e.scrollHeight;
+
+      e.style.fontSize = (oldSize + 1) + "px";
+      var newSize = oldSize + 1;
+      var newWidth = e.scrollWidth;
+      var newHeight = e.scrollHeight;
+
+      if ((e.scrollHeight - oldHeight) > 0 || (e.scrollWidth - oldWidth) > 0) {
+        return shrink(e)
+      } else {
+        return grow(e)
+      }
+    }
+
+    function shrink(e) {
+      var oldSize = 34;
+      var oldWidth = e.scrollWidth;
+      var oldHeight = e.scrollHeight;
+
+      if (e.style.fontSize !== "") {
+        oldSize = parseInt(e.style.fontSize.replace('px',''));
+      }
+
+      e.style.fontSize = (oldSize - 1) + "px";
+      var newSize = oldSize - 1;
+      var newWidth = e.scrollWidth;
+      var newHeight = e.scrollHeight;
+
+      if (!((e.scrollHeight - oldHeight) === 0 && (e.scrollWidth - oldWidth) === 0)) {
+        return shrink(e)
+      }
+    }
+  </script>
+
+  <script>
+    Reveal.initialize({
+      controls: false,
+      progress: false,
+      history: true,
+      center: true,
+      touch: true,
+      fragments: true,
+      transition: 'fade',
+      margin: 0,
+      width: "100%",
+      height: "100%",
+    });
+
+    Reveal.addEventListener( 'slidechanged', function( event ) {
+      var slide = document.querySelector('.slide.present');
+      var scaler = slide.querySelector('pre');
+      var codeBlock = slide.querySelector('code');
+
+      if (codeBlock) {
+        codeBlock.style.minHeight = '100vh';
+        scaler.style.overflow = 'visible';
+        grow(codeBlock);
+        codeBlock.style.minHeight = '100%';
+        codeBlock.style.maxHeight = '80vh';
+      }
+    });
+  </script>
+
+
+  <script src="/reveal.js/plugin/zoom-js/zoom.js"></script>
   </body>
 </html>
