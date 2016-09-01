@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Jacob Bass">
+
+  <title>Kappa Delta Lambda</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../reveal.js/css/reveal.css">
+  <style type="text/css">code{white-space: pre;}</style>
+
+
+
+  <link rel="stylesheet" href="../../reveal.js/css/theme/solarized.css" id="theme">
+
+
+<link rel="stylesheet" href="../../css/reveal_overrides.css">
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section>
+        <h1>Kappa Delta Lambda</h1>
+        <h2 class="subtitle">Serverless Programming</h2>
+      </section>
+
+      <section><section id="conways-law" class="titleslide slide level1"><h1>conway’s law</h1></section><section id="organizations-which-design-systems-are-constrained-to-produce-designs-which-are-copies-of-the-communication-structures-of-these-organizations" class="slide level2">
+<h1>organizations which design systems … are constrained to produce designs which are copies of the communication structures of these organizations</h1>
+</section></section>
+<section><section id="jim" class="titleslide slide level1 center" data-background="#073642"><h1>jim</h1></section><section id="initech" class="slide level2">
+<h1>initech</h1>
+<ul>
+<li class="fragment"><h3 id="developers">300 developers</h3></li>
+<li class="fragment"><h3 id="code-review-culture">code review culture</h3></li>
+<li class="fragment"><h3 id="post-in-slack-when-opening-a-pr">post in slack when opening a PR</h3></li>
+<li class="fragment"><h3 id="post-in-slack-when-upgrading-or-releasing-a-project">post in slack when upgrading or releasing a project</h3></li>
+<li class="fragment"><h3 id="but-slow-to-action-slow-to-release-slow-to-respond">but slow to action, slow to release, slow to respond</h3></li>
+</ul>
+</section><section id="manual-labour" class="slide level2">
+<h1>manual labour</h1>
+<ul>
+<li class="fragment"><h3 id="post-in-slack-when-actioning-a-project-task">post in slack when actioning a project task</h3></li>
+<li class="fragment"><h3 id="no-one-gets-distracted-by-slack-right">no one get’s distracted by slack, right?</h3></li>
+<li class="fragment"><h3 id="minutes-a-day-300-devs-500000-a-year">10 minutes a day * 300 devs === $500,000 a year</h3></li>
+</ul>
+</section><section id="post-in-our-company-chat-whenever" class="slide level2">
+<h1>post in our company chat whenever:</h1>
+<ul>
+<li class="fragment"><h3 id="someone-opens-or-reopens-a-pr">someone opens or reopens a PR</h3></li>
+<li class="fragment"><h3 id="someone-publishes-deprecates-or-unpublishes-an-npm-module">someone publishes, deprecates or unpublishes an npm module</h3></li>
+</ul>
+</section></section>
+<section><section id="what-does-serverless-mean" class="titleslide slide level1 center" data-background="#073642"><h1>what does serverless mean?</h1></section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="va">module</span>.<span class="at">exports</span> <span class="op">=</span> <span class="kw">function</span> <span class="at">handler</span>(event<span class="op">,</span> context<span class="op">,</span> cb) <span class="op">{</span>
+  <span class="cf">return</span> <span class="at">cb</span>(<span class="op">{</span> <span class="dt">status</span><span class="op">:</span> <span class="dv">200</span><span class="op">,</span> <span class="dt">data</span><span class="op">:</span> <span class="st">&quot;Hello World!&quot;</span> <span class="op">}</span>)<span class="op">;</span>
+<span class="op">}</span></code></pre></div>
+</section><section id="what-does-it-really-mean" class="slide level2">
+<h1>what does it really mean?</h1>
+<ul>
+<li class="fragment"><h3 id="containers-running-in-the-cloud">containers running in the cloud</h3></li>
+<li class="fragment"><h3 id="automatically-provisioned">automatically provisioned</h3></li>
+<li class="fragment"><h3 id="automatically-scaled">automatically scaled</h3></li>
+</ul>
+</section><section id="its-php-shared-hosting-meets-heroku" class="slide level2">
+<h1>it’s php shared hosting meets heroku</h1>
+</section></section>
+<section><section id="what-used-to-get-in-our-way" class="titleslide slide level1 center" data-background="#073642"><h1>what used to get in our way?</h1></section><section id="cost" class="slide level2">
+<h1>cost</h1>
+</section><section id="scalability" class="slide level2">
+<h1>scalability</h1>
+</section><section id="ease-of-deployment" class="slide level2">
+<h1>ease of deployment</h1>
+</section><section id="time-to-delivery" class="slide level2">
+<h1>time to delivery</h1>
+</section></section>
+<section><section id="should-we-use-it" class="titleslide slide level1 center" data-background="#073642"><h1>should we use it?</h1></section><section id="cost-1" class="slide level2">
+<h1>cost</h1>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"> </th>
+<th style="text-align: left;">EC2</th>
+<th style="text-align: left;">Lambda</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">$ per GB/h</td>
+<td style="text-align: left;">0.013</td>
+<td style="text-align: left;">0.06</td>
+</tr>
+</tbody>
+</table>
+</section><section id="server-cost" class="slide level2">
+<h1>server: cost</h1>
+<ul>
+<li class="fragment"><h3 id="running-costs">running costs</h3></li>
+<li class="fragment"><h3 id="losing-money-whenever-inactive">losing money whenever inactive</h3></li>
+<li class="fragment"><h3 id="scaling-costs">scaling costs</h3></li>
+<li class="fragment"><h3 id="storage-costs-provider-specific">storage costs (provider specific)</h3></li>
+</ul>
+</section><section id="lambda-cost" class="slide level2">
+<h1>lambda: cost</h1>
+<ul>
+<li class="fragment"><h3 id="charged-per-100ms">charged per 100ms</h3></li>
+<li class="fragment"><h3 id="no-charge-for-storage-retrieval">no charge for storage, retrieval</h3></li>
+<li class="fragment"><h3 id="no-running-costs">no running costs</h3></li>
+<li class="fragment"><h3 id="no-charge-for-inactivity">no charge for inactivity</h3></li>
+</ul>
+</section><section id="scalable" class="slide level2">
+<h1>scalable</h1>
+<ul>
+<li class="fragment"><h3 id="auto-replicate">auto-replicate</h3></li>
+<li class="fragment"><h3 id="auto-scaled">auto-scaled</h3></li>
+<li class="fragment"><h3 id="unlimited-concurrency">unlimited concurrency</h3></li>
+</ul>
+</section><section id="distributed" class="slide level2">
+<h1>distributed</h1>
+<ul>
+<li class="fragment"><h3 id="multi-region">multi region</h3></li>
+<li class="fragment"><h3 id="micro-microservices">micro microservices</h3></li>
+</ul>
+</section><section id="someone-elses-problem" class="slide level2">
+<h1>someone else’s problem</h1>
+</section></section>
+<section><section id="frameworks" class="titleslide slide level1 center" data-background="#073642"><h1>frameworks</h1></section><section id="serverless" class="slide level2">
+<h1>serverless</h1>
+<ul>
+<li class="fragment"><h3 id="massive-community">massive community</h3></li>
+<li class="fragment"><h3 id="configuration-over-convention">configuration over convention</h3></li>
+<li class="fragment"><h3 id="plugins-and-modules-for-almost-everything">plugins and modules for almost everything</h3></li>
+<li class="fragment"><h3 id="terraform-and-cloudformation-templates">terraform and cloudformation templates</h3></li>
+</ul>
+</section><section id="claudia" class="slide level2">
+<h1>claudia</h1>
+<ul>
+<li class="fragment"><h3 id="very-simple">very simple</h3></li>
+<li class="fragment"><h3 id="small-community">small community</h3></li>
+<li class="fragment"><h3 id="not-as-many-out-of-the-box-solutions">not as many out-of-the-box solutions</h3></li>
+</ul>
+</section><section id="many-many-more" class="slide level2">
+<h1>many many more</h1>
+</section></section>
+<section><section id="use-cases" class="titleslide slide level1 center" data-background="#073642"><h1>use cases</h1></section><section id="distributed-rendering-engine" class="slide level2">
+<h1>distributed rendering engine</h1>
+<ul>
+<li class="fragment"><h3 id="push-javascript-rendering-into-the-cloud">push javascript rendering into the cloud</h3></li>
+<li class="fragment"><h3 id="use-whatever-language-you-want-on-the-server">use whatever language you want on the server</h3></li>
+<li class="fragment"><h3 id="seo-for-all">SEO for all</h3></li>
+</ul>
+</section><section id="etl" class="slide level2">
+<h1>etl</h1>
+<ul>
+<li class="fragment"><h3 id="listen-for-s3-bucket-events">listen for s3 bucket events</h3></li>
+<li class="fragment"><h3 id="stream-and-split-docs-into-chunks">stream and split docs into chunks</h3></li>
+<li class="fragment"><h3 id="process-chunks-asynchronously">process chunks asynchronously</h3></li>
+<li class="fragment"><h3 id="run-on-hooks-only-processing-when-required">run on hooks, only processing when required</h3></li>
+</ul>
+</section><section id="load-testing" class="slide level2">
+<h1>load testing</h1>
+<ul>
+<li class="fragment"><h3 id="micro-ui-controller">micro ui + controller</h3></li>
+<li class="fragment"><h3 id="swarm-created-and-aggregated-by-controller">swarm created and aggregated by controller</h3></li>
+</ul>
+</section><section id="chatbots" class="slide level2">
+<h1>chatbots</h1>
+<ul>
+<li class="fragment"><h3 id="easy-to-deploy-test-build-interactions">easy to deploy, test, build interactions</h3></li>
+<li class="fragment"><h3 id="only-live-on-interactions">only “live” on interactions</h3></li>
+</ul>
+</section><section id="cicd" class="slide level2">
+<h1>ci/cd</h1>
+<ul>
+<li class="fragment"><h3 id="use-organisation-webhooks">use organisation webhooks</h3></li>
+<li class="fragment"><h3 id="run-teststasksemit-events">run tests/tasks/emit events</h3></li>
+<li class="fragment"><h3 id="expose-results-to-dynamodb-for-aggregation-reporting">expose results to DynamoDB for aggregation / reporting</h3></li>
+</ul>
+</section></section>
+<section><section id="demo" class="titleslide slide level1 center" data-background="#073642"><h1>demo</h1></section></section>
+<section><section id="serverless-the-bad-parts" class="titleslide slide level1 center" data-background="#073642"><h1>serverless: the bad parts</h1></section><section id="running-binaries" class="slide level2">
+<h1>running binaries</h1>
+<ul>
+<li class="fragment"><h3 id="download-aws-linux-ami">download aws linux AMI</h3></li>
+<li class="fragment"><h3 id="build-binary-on-ami">build binary on AMI</h3></li>
+<li class="fragment"><h3 id="ship-binary-along-with-code">ship binary along with code</h3></li>
+<li class="fragment"><h3 id="place-binary-in-path">place binary in PATH</h3></li>
+</ul>
+</section><section id="latency" class="slide level2">
+<h1>latency</h1>
+<ul>
+<li class="fragment"><h3 id="rtt---300ms">RTT +/- 300ms</h3></li>
+<li class="fragment"><h3 id="spinup---3s">Spinup +/- 3s</h3></li>
+<li class="fragment"><h3 id="cpu-ram-and-hd-bound">CPU, RAM and HD bound</h3></li>
+</ul>
+</section><section id="mgmt" class="slide level2">
+<h1>mgmt</h1>
+<ul>
+<li class="fragment"><h3 id="aws-console">aws console</h3></li>
+<li class="fragment"><h3 id="framework-lock-in">framework lock-in</h3></li>
+</ul>
+</section><section id="offline-dev" class="slide level2">
+<h1>offline dev</h1>
+<ul>
+<li class="fragment"><h3 id="mock-apig">mock apig</h3></li>
+<li class="fragment"><h3 id="mockstub-all-aws-deps">mock/stub all aws deps</h3></li>
+</ul>
+</section></section>
+
+      <section class="center">
+        <h1>${whoami:-Jacob Bass}</h1>
+
+        <p>web:  www.bassjacob.com</p>
+        <p>email: me@bassjacob.com</p>
+        <p>twitter: @bassjacob</p>
+        <p>github:   bassjacob</p>
+      </section>
+    </div>
+  </div>
+
+  <script src="../../reveal.js/lib/js/head.min.js"></script>
+  <script src="../../reveal.js/js/reveal.js"></script>
+
+  <script>
+    function grow(e) {
+      var oldSize = 34;
+
+      if (e.style.fontSize !== "") {
+        oldSize = parseInt(e.style.fontSize.replace('px',''));
+      }
+
+      e.style.fontSize = oldSize + "px";
+      var oldWidth = e.scrollWidth;
+      var oldHeight = e.scrollHeight;
+
+      e.style.fontSize = (oldSize + 1) + "px";
+      var newSize = oldSize + 1;
+      var newWidth = e.scrollWidth;
+      var newHeight = e.scrollHeight;
+
+      if ((e.scrollHeight - oldHeight) > 0 || (e.scrollWidth - oldWidth) > 0) {
+        return shrink(e)
+      } else {
+        return grow(e)
+      }
+    }
+
+    function shrink(e) {
+      var oldSize = 34;
+      var oldWidth = e.scrollWidth;
+      var oldHeight = e.scrollHeight;
+
+      if (e.style.fontSize !== "") {
+        oldSize = parseInt(e.style.fontSize.replace('px',''));
+      }
+
+      e.style.fontSize = (oldSize - 1) + "px";
+      var newSize = oldSize - 1;
+      var newWidth = e.scrollWidth;
+      var newHeight = e.scrollHeight;
+
+      if (!((e.scrollHeight - oldHeight) === 0 && (e.scrollWidth - oldWidth) === 0)) {
+        return shrink(e)
+      }
+    }
+  </script>
+
+  <script>
+    Reveal.initialize({
+      controls: false,
+      progress: false,
+      history: true,
+      center: true,
+      touch: true,
+      fragments: true,
+      transition: 'fade',
+      margin: 0,
+      width: "100%",
+      height: "100%",
+    });
+
+    function growCodeBlock() {
+      var slide = document.querySelector('.slide.present');
+      var scaler = slide.querySelector('pre');
+      var codeBlock = slide.querySelector('code');
+
+      if (codeBlock) {
+        scaler.style.width = '100%';
+        codeBlock.style.minHeight = '100vh';
+        scaler.style.overflow = 'visible';
+        grow(codeBlock);
+        codeBlock.style.minHeight = '100%';
+        codeBlock.style.maxHeight = '80vh';
+      }
+    }
+
+    Reveal.addEventListener('ready', growCodeBlock);
+    Reveal.addEventListener('slidechanged', growCodeBlock);
+  </script>
+
+
+  <script src="../../reveal.js/plugin/zoom-js/zoom.js"></script>
+  </body>
+</html>
