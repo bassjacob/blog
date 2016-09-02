@@ -10,6 +10,7 @@ import           System.FilePath.Posix  (takeBaseName,takeDirectory,(</>),splitF
 import           Text.Pandoc.Options
 
 --------------------------------------------------------------------------------
+
 main :: IO ()
 main = do
   revealTemplate <- readFile "templates/revealjs.html"
@@ -40,7 +41,7 @@ main = do
       compile copyFileCompiler
 
     match "pages/*" $ do
-      route   $ cleanRouteWithoutDir
+      route cleanRouteWithoutDir
       compile $ pandocCompiler
         >>= loadAndApplyTemplate "templates/page.html"    defaultContext
         >>= loadAndApplyTemplate "templates/default.html" defaultContext
@@ -48,7 +49,7 @@ main = do
         >>= cleanIndexUrls
 
     match "posts/*" $ do
-      route $ cleanRoute
+      route cleanRoute
       compile $ pandocCompiler
         >>= loadAndApplyTemplate "templates/post.html"    postCtx
         >>= loadAndApplyTemplate "templates/default.html" postCtx
@@ -56,14 +57,14 @@ main = do
         >>= cleanIndexUrls
 
     match "presentations/*" $ do
-      route $ cleanRoute
+      route cleanRoute
       compile $ presentationCompiler revealTemplate
         >>= loadAndApplyTemplate "templates/revealjs.html" defaultContext
         >>= relativizeUrls
         >>= cleanIndexUrls
 
     create ["archive.html"] $ do
-      route $ cleanRoute
+      route cleanRoute
       compile $ do
         posts <- recentFirst =<< loadAll "posts/*"
         let archiveCtx =
@@ -80,8 +81,7 @@ main = do
 
     match "index.html" $ do
       route idRoute
-      compile $ do
-        getResourceBody
+      compile $ getResourceBody
           >>= applyAsTemplate defaultContext
           >>= loadAndApplyTemplate "templates/default.html" defaultContext
           >>= relativizeUrls
@@ -90,6 +90,7 @@ main = do
     match "templates/*" $ compile templateCompiler
 
 --------------------------------------------------------------------------------
+
 postCtx :: Context String
 postCtx =
     dateField "date" "%B %e, %Y" `mappend`
