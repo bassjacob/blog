@@ -1,33 +1,51 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <meta name="author" content="Jacob Bass">
-$if(keywords)$
-  <meta name="keywords" content="$for(keywords)$$keywords$$sep$, $endfor$">
-$endif$
+  <meta name="author" content="Jacob Bass"> $if(keywords)$
+  <meta name="keywords" content="$for(keywords)$$keywords$$sep$, $endfor$"> $endif$
   <title>$title$</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
   <link rel="stylesheet" href="/reveal.js/css/reveal.css">
-  <style type="text/css">code{white-space: pre;}</style>
-$if(highlighting-css)$
   <style type="text/css">
-$highlighting-css$
+    code {
+      white-space: pre;
+    }
   </style>
-$endif$
+  $if(highlighting-css)$
+  <style type="text/css">
+    $highlighting-css$
+  </style>
+  $endif$ $if(theme)$
+  <link rel="stylesheet" href="/reveal.js/css/theme/$theme$.css" id="theme"> $else$
+  <link rel="stylesheet" href="/reveal.js/css/theme/black.css" id="theme"> $endif$
 
-$if(theme)$
-  <link rel="stylesheet" href="/reveal.js/css/theme/$theme$.css" id="theme">
-$else$
-  <link rel="stylesheet" href="/reveal.js/css/theme/black.css" id="theme">
-$endif$
+  <link rel="stylesheet" href="/css/reveal_overrides.css">
 
-<link rel="stylesheet" href="/css/reveal_overrides.css">
+  <script>
+    if (document.location.hostname !== 'localhost') {
+      (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
+      ga('create', 'UA-58416048-1', 'auto');
+      ga('send', 'pageview');
+    }
+  </script>
 </head>
+
 <body>
   <div class="reveal">
     <div class="slides">
@@ -42,10 +60,10 @@ $endif$
       <section class="center">
         <h1>$${whoami:-Jacob Bass}</h1>
 
-        <p>web:  www.bassjacob.com</p>
+        <p>web: www.bassjacob.com</p>
         <p>email: me@bassjacob.com</p>
         <p>twitter: @bassjacob</p>
-        <p>github:   bassjacob</p>
+        <p>github: bassjacob</p>
       </section>
     </div>
   </div>
@@ -58,7 +76,7 @@ $endif$
       var oldSize = 34;
 
       if (e.style.fontSize !== "") {
-        oldSize = parseInt(e.style.fontSize.replace('px',''));
+        oldSize = parseInt(e.style.fontSize.replace('px', ''));
       }
 
       e.style.fontSize = oldSize + "px";
@@ -83,7 +101,7 @@ $endif$
       var oldHeight = e.scrollHeight;
 
       if (e.style.fontSize !== "") {
-        oldSize = parseInt(e.style.fontSize.replace('px',''));
+        oldSize = parseInt(e.style.fontSize.replace('px', ''));
       }
 
       e.style.fontSize = (oldSize - 1) + "px";
@@ -130,7 +148,7 @@ $endif$
     Reveal.addEventListener('slidechanged', growCodeBlock);
   </script>
 
-
   <script src="/reveal.js/plugin/zoom-js/zoom.js"></script>
-  </body>
+</body>
+
 </html>
